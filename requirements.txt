@@ -1,0 +1,11 @@
+numpy
+tensorflow-cpu
+pandas
+flask
+pillow
+scikit-image
+uvicorn
+gunicorn==19.9.0
+httptools
+pybase64
+uwsgi

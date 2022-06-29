@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="msapplication-tap-highlight" content="no">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+      #drop-zone {
+            max-width: 450px;
+            height: 450px;
+            border: 2px dotted rgb(0, 0, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #output-zone {
+            max-width: 450px;
+            height: 450px;
+            border: 2px dotted rgb(0, 0, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            object-fit: scale-down;
+            width: 100%;
+            height: 100%;
+        }
+
+
+
+    </style>
+   
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    </head>
+
+    <body>
+<header>
+
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark black darken-3 scrolling-navbar">
+    <a class="navbar-brand" href="#"><strong>Land Scape image Colorization</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.linkedin.com/in/chethann/">About me</a>
+        </li>
+      </ul>
+      
+    </div>
+  </nav>
+
+</header>
+<br><br><br><br><br>
+<form action="/" method="post" id="myform" enctype="multipart/form-data">
+  <div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <div id="drop-zone" >
+        <img src="" alt="" id="inpimg" style="display: none;">
+        <p>Drop file or click to upload</p>
+        <input type="file" id="file" name='file' hidden>
+    </div>
+    <div class="row">
+      <div class=" col-sm-1"></div>
+      <div class=" col-sm-4">
+        <button id="submit" class="btn  btn-block my-4 blue-gradient" type="submit" disabled>Colorize</button>
+      </div>
+      <div class=" col-sm-1"></div>
+      <div class=" col-sm-4">
+        <button id="reset" class="btn btn-block my-4 btn-danger" type="reset" disabled>Remove</button>
+      </div>
+      <div class=" col-sm-2"></div>
+    </div>
+    </div>
+    <div class="col-sm-12 col-md-6" id="output-block" style="display:none;">
+      <div id="output-zone">
+        <img src="" alt="" id="outimg" style="display:none;">
+        <div class="spinner-border text-info" id="loading" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div class="row">
+      <div class=" col-sm-2"></div>
+      <div class=" col-sm-8">
+        <a href="" id="outimg_down" download='' class="btn btn-block my-4 peach-gradient">Download</a>
+      </div>
+      <div class=" col-sm-2"></div>
+    </div>
+    </div>
+    
+  </div>
+  <br>
+
+</div>
+
+</form>
+<hr>
+<h3 style="margin-left:5pt">Sample Images to test</h3>
+<br>
+
+<div class="container">
+  <div class="row">
+  <div class="col-sm-12 col-md-4 col-lg-3" style="margin-bottom:5pt">
+<a href="{{ url_for('static', filename='ti/4.png') }}" id="outimg_down" download='img1.png'>
+<div class="view overlay zoom">
+  <img src="{{ url_for('static', filename='ti/4.png') }}" class="img-fluid " alt="zoom">
+  <div class="mask flex-center waves-effect waves-light">
+    <p class="white-text">Download</p>
+  </div>
+</div></a>
+</div>
+
+<div class="col-sm-12 col-md-4 col-lg-3" style="margin-bottom:5pt">
+  <a href="{{ url_for('static', filename='ti/2.jpg') }}" id="outimg_down" download='img2.jpg'>
+  <div class="view overlay zoom">
+    <img src="{{ url_for('static', filename='ti/2.jpg') }}" class="img-fluid " alt="zoom">
+    <div class="mask flex-center waves-effect waves-light">
+      <p class="white-text">Download</p>
+    </div>
+  </div></a>
+  </div>
+
+
+  <div class="col-sm-12 col-md-4 col-lg-3" style="margin-bottom:5pt">
+    <a href="{{ url_for('static', filename='ti/3.jpg') }}" id="outimg_down" download='img3.jpg'>
+    <div class="view overlay zoom">
+      <img src="{{ url_for('static', filename='ti/3.jpg') }}" class="img-fluid " alt="zoom">
+      <div class="mask flex-center waves-effect waves-light">
+        <p class="white-text">Download</p>
+      </div>
+    </div></a>
+    </div>
+
+    <div class="col-sm-12 col-md-4 col-lg-3" style="margin-bottom:5pt">
+      <a href="{{ url_for('static', filename='ti/6.jpeg') }}" id="outimg_down" download='img4.jpeg'>
+      <div class="view overlay zoom">
+        <img src="{{ url_for('static', filename='ti/6.jpeg') }}" class="img-fluid " alt="zoom">
+        <div class="mask flex-center waves-effect waves-light">
+          <p class="white-text">Download</p>
+        </div>
+      </div></a>
+      </div>
+
+      <div class="col-sm-12 col-md-4 col-lg-3" style="margin-bottom:5pt">
+        <a href="{{ url_for('static', filename='ti/5.jpg') }}" id="outimg_down" download='img5.jpg'>
+        <div class="view overlay zoom">
+          <img src="{{ url_for('static', filename='ti/5.jpg') }}" class="img-fluid " alt="zoom">
+          <div class="mask flex-center waves-effect waves-light">
+            <p class="white-text">Download</p>
+          </div>
+        </div></a>
+        </div>
+
+        <div class="col-sm-12 col-md-4 col-lg-3" style="margin-bottom:5pt">
+          <a href="{{ url_for('static', filename='ti/8.jpg') }}" id="outimg_down" download='img6.jpg'>
+          <div class="view overlay zoom">
+            <img src="{{ url_for('static', filename='ti/8.jpg') }}" class="img-fluid " alt="zoom">
+            <div class="mask flex-center waves-effect waves-light">
+              <p class="white-text">Download</p>
+            </div>
+          </div></a>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-3" style="margin-bottom:5pt">
+            <a href="{{ url_for('static', filename='ti/7.jpg') }}" id="outimg_down" download='img7.jpg'>
+            <div class="view overlay zoom">
+              <img src="{{ url_for('static', filename='ti/7.jpg') }}" class="img-fluid " alt="zoom">
+              <div class="mask flex-center waves-effect waves-light">
+                <p class="white-text">Download</p>
+              </div>
+            </div></a>
+            </div>
+            
+          
+        
+      
+
+  </div>
+</div>
+<br>
+<br>
+<!-- <p>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  {% endwith %}
+</p> -->
+
+
+ <script>
+
+        const dropZone = document.querySelector('#drop-zone');
+        const inputElement = document.querySelector('input');
+        const resetButton = document.getElementById('reset');
+        const img = document.getElementById('inpimg');
+        let p = document.querySelector('p')
+        const out_img = document.getElementById('outimg');
+        var osrc = "data:image/jpg;base64,";
+        let file;
+        inputElement.addEventListener('change', function (e) {
+            const clickFile = this.files[0];
+            file = this.files[0];
+            if (clickFile) {
+                showFile(clickFile)
+            }
+        })
+        function showFile(file){
+          let fileType = file.type; 
+          let validExtensions = ["image/jpeg", "image/png", "image/jpg","image/webp"]; //adding valid image extensions in array
+          if(validExtensions.includes(fileType)){ 
+                img.style = "display:block;";
+                p.style = 'display: none';
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = function () {
+                    const result = reader.result;
+                    let src = this.result;
+                    img.src = src;
+                    img.alt = file.name
+                }
+                document.getElementById("submit").disabled = false; 
+                document.getElementById("reset").disabled = false;
+          }else{
+            alert("Upload only JPEG,JPG or PNG images only");
+                img.style = "display:none;";
+                p.style = 'display: block';
+                document.getElementById("submit").disabled = true; 
+                document.getElementById("reset").disabled = true;
+          }
+        }
+
+
+        resetButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                img.style = "display:none;";
+                p.style = 'display: block';
+                document.getElementById("submit").disabled = true; 
+                document.getElementById("reset").disabled = true;
+
+        });
+
+
+        dropZone.addEventListener('click', () => inputElement.click());
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            file = e.dataTransfer.files[0];
+            $("input[type='file']").prop("files",e.dataTransfer.files);
+            showFile(file)
+        });
+
+
+  $("#myform").submit(function(e) {
+    e.preventDefault();
+    var url=window.location.href;
+    var formData = new FormData(this);
+    document.getElementById("output-block").style= 'display: block';
+    $.ajax({url:url,
+            type: 'POST',
+            url: url+'/process',
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+    success: function(data, status){
+      var v=JSON.stringify(data['p']);
+      document.getElementById("loading").style= 'display: none';
+      document.getElementById("outimg").style= 'display: block';
+    out_img.src = osrc+data['image'];
+    out_img.alt = JSON.stringify(data['filename']);
+    document.getElementById("outimg_down").href=osrc+data['image'];
+    var link_name=JSON.stringify(data['filename']);
+    document.getElementById("outimg_down").download=link_name.slice(1, link_name.length-1);
+  }});
+});
+    </script>
+    </body>
+  </html>    
